@@ -1,7 +1,7 @@
 {
   "name": "time-tracker-frontend",
   "version": "0.0.1",
-  "description": "Ti,e Tracker",
+  "description": "Time Tracker",
   "productName": "Time tracker",
   "author": "aleksey <av.pavlow@gmail.com>",
   "private": true,
