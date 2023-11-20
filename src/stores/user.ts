@@ -21,10 +21,11 @@ export default defineStore('user', {
     },
   },
   actions: {
-    authenticate(values: any): Promise<void> {
-      return axios.get('http://localhost:80/sanctum/csrf-cookie').then(() => {
-        axios
-          .post('http://localhost:80/api/login', values)
+    authenticate(values: any) {
+        axios.defaults.withXSRFToken  = true;
+        axios.defaults.withCredentials  = true;
+        axios.get('http://localhost:80/sanctum/csrf-cookie').then(response => {
+        axios.post('http://localhost:80/login', values)
           .then((response) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -44,7 +45,7 @@ export default defineStore('user', {
               this.errorInfo = error.response.data.message;
             }
           });
-      });
+        })
     },
     async authCheck(): Promise<void> {
       await axios
