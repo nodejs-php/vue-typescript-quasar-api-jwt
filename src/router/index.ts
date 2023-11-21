@@ -9,6 +9,7 @@ import {
 import routes from './routes';
 import useUserStore from '../stores/user';
 import axios from 'axios';
+import { Cookies } from 'quasar';
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -40,7 +41,7 @@ export default route(function (/* { store, ssrContext } */) {
         const store = useUserStore();
 
         axios.interceptors.request.use(function (config) {
-          config.headers.Authorization = store.access_token;
+          config.headers.Authorization = Cookies.get('access_cookie');
           return config;
         });
 
