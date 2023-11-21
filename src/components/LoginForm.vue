@@ -8,7 +8,7 @@
         <label>
           Username
         </label>
-        <q-input filled type="email" v-model="auth.email" placeholder="Email"/>
+        <q-input filled type="email" v-model="auth.email" placeholder="Email" />
         <br>
         <label>
           Password
@@ -37,8 +37,8 @@ export default {
                 password: 'required|min:5|max:25',
             },
             auth: {
-                email: '',
-                password: '',
+                email: 'dev@example.com',
+                password: '123',
             },
         };
     },

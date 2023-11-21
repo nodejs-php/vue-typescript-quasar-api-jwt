@@ -7,8 +7,8 @@ import {
 } from 'vue-router';
 
 import routes from './routes';
-
 import useUserStore from '../stores/user';
+import axios from 'axios';
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -38,11 +38,17 @@ export default route(function (/* { store, ssrContext } */) {
         // @ts-ignore
         document.title = to.meta.title
         const store = useUserStore();
+
+        axios.interceptors.request.use(function (config) {
+          config.headers.Authorization = store.access_token;
+          return config;
+        });
+
         store.authCheck().then(() => {
             if (to.meta.middleware) {
                 if (to.meta.middleware == 'guest') {
                     if (store.isLoggedIn) {
-                        next({name: 'dashboard'});
+                        next({name: 'main-layout'});
                     }
                     next();
                 } else {

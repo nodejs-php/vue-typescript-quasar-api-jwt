@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
-import { useRouter } from 'vue-router'
 import axios from 'axios';
-const $router = useRouter()
+import { Cookies } from 'quasar';
 
 interface UserState {
   isLoggedIn: boolean;
@@ -10,11 +9,12 @@ interface UserState {
 }
 
 export default defineStore('user', {
-  state: (): UserState => <UserState>({
-    isLoggedIn: false,
-    errorInfo: '',
-    user: {},
-  }),
+  state: (): UserState =>
+    <UserState>{
+      isLoggedIn: false,
+      errorInfo: '',
+      user: {},
+    },
   getters: {
     setLoggedIn(state: UserState): boolean {
       return state.isLoggedIn;
@@ -22,30 +22,33 @@ export default defineStore('user', {
   },
   actions: {
     authenticate(values: any) {
-        axios.defaults.withXSRFToken  = true;
-        axios.defaults.withCredentials  = true;
-        axios.get('http://localhost:80/sanctum/csrf-cookie').then(response => {
-        axios.post('http://localhost:80/login', values)
-          .then((response) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            this.user = response.data.data;
+      axios
+        .post('http://localhost:80/api/login', values)
+        .then((response) => {
+          if (response.data.status == 'success') {
+            this.errorInfo = '';
 
-            if (response.data.status == 'success') {
-              this.errorInfo = '';
-              $router.push({ name: 'dashboard' });
-            } else {
-              this.errorInfo = response.data.message;
-              console.log(this.errorInfo);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            if (error.response.status === 422) {
-              this.errorInfo = error.response.data.message;
-            }
-          });
+            this.. =
+              'access_token=' +
+              response.data.token_type +
+              ' ' +
+              response.data.access_token;
+            axios.interceptors.request.use((config) => {
+              config.headers.Authorization = this.access_token;
+              return config;
+            });
+            this.router.push({ name: 'main-layout' });
+          } else {
+            this.errorInfo = response.data.message;
+            console.log(this.errorInfo);
+          }
         })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status === 422) {
+            this.errorInfo = error.response.data.message;
+          }
+        });
     },
     async authCheck(): Promise<void> {
       await axios
@@ -69,7 +72,7 @@ export default defineStore('user', {
     },
     logout(): void {
       this.isLoggedIn = false;
-      $router.push({ name: 'login' });
+      this.router.push({ name: 'login' });
     },
   },
 });
