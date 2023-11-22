@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
+      "*": [
         "./src/*"
         // set path `@/*` as alias of `src/*`
       ]

@@ -29,7 +29,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Справочники </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -53,15 +53,15 @@ const userStore = useUserStore();
 
 const essentialLinks = [
   {
-    title: 'Docs',
+    title: 'Проекты',
     caption: 'quasar.dev',
-    icon: 'school',
+    icon: 'space_dashboard',
     link: 'https://quasar.dev',
   },
   {
-    title: 'Github',
+    title: 'Таски',
     caption: 'github.com/quasarframework',
-    icon: 'code',
+    icon: 'rule',
     link: 'https://github.com/quasarframework',
   },
 ];

@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
         name: 'main-layout',
         path: '/',
         component: () => import('layouts/MainLayout.vue'),
-        children: [{path: '', component: () => import('pages/IndexPage.vue')}],
+        children: [{path: '', component: () => import('pages/projects/IndexPage.vue')}],
         meta: {
             middleware: 'auth',
             title: 'Login',
