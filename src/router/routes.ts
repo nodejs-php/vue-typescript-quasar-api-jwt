@@ -1,5 +1,4 @@
 import {RouteRecordRaw} from 'vue-router';
-import Dashboard from 'components/DashboardComponent.vue';
 import Login from 'components/LoginForm.vue';
 
 const routes: RouteRecordRaw[] = [
@@ -31,15 +30,6 @@ const routes: RouteRecordRaw[] = [
         meta: {
             middleware: 'guest',
             title: 'Login',
-        },
-    },
-    {
-        name: 'dashboard',
-        path: '/dashboard',
-        component: Dashboard,
-        meta: {
-            middleware: 'auth',
-            title: 'Dashboard',
         },
     },
 ];

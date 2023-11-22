@@ -68,6 +68,7 @@ export default defineStore('user', {
     },
     logout(): void {
       this.isLoggedIn = false;
+      Cookies.set('access_cookie', '');
       this.router.push({ name: 'login' });
     },
   },
