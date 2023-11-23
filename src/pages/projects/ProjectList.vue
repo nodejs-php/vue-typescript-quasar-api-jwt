@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
+import ExampleComponent from 'components/ProjectList.vue';
 import { ref } from 'vue';
 
 const todos = ref<Todo[]>([

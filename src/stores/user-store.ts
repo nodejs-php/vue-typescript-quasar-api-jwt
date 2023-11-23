@@ -27,13 +27,16 @@ export default defineStore('user', {
         .then((response) => {
           if (response.data.status == 'success') {
             this.errorInfo = '';
-            Cookies.set('access_cookie', response.data.token_type + ' ' + response.data.access_token);
+            Cookies.set(
+              'access_cookie',
+              response.data.token_type + ' ' + response.data.access_token
+            );
 
             axios.interceptors.request.use((config) => {
               config.headers.Authorization = Cookies.get('access_cookie');
               return config;
             });
-            this.router.push({ name: 'main-layout' });
+            this.router.push({ name: 'project-list' });
           } else {
             this.errorInfo = response.data.message;
             console.log(this.errorInfo);

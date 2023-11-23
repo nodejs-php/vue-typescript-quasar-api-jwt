@@ -18,7 +18,9 @@
             <q-menu>
               <q-list style="min-width: 100px">
                 <q-item clickable v-close-popup>
-                  <q-item-section @click="userStore.logout">Выход</q-item-section>
+                  <q-item-section @click="userStore.logout"
+                    >Выход</q-item-section
+                  >
                 </q-item>
               </q-list>
             </q-menu>
@@ -47,8 +49,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import EssentialLink  from 'components/EssentialLink.vue';
-import useUserStore from '../stores/user';
+import EssentialLink from 'components/EssentialLink.vue';
+import useUserStore from '../stores/user-store';
 const userStore = useUserStore();
 
 const essentialLinks = [
@@ -56,13 +58,13 @@ const essentialLinks = [
     title: 'Проекты',
     caption: 'quasar.dev',
     icon: 'space_dashboard',
-    link: 'https://quasar.dev',
+    route: 'project-list',
   },
   {
     title: 'Таски',
     caption: 'github.com/quasarframework',
     icon: 'rule',
-    link: 'https://github.com/quasarframework',
+    route: 'task-list',
   },
 ];
 
@@ -71,5 +73,5 @@ const leftDrawerOpen = ref(false);
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
-
 </script>
+../stores/user-store
