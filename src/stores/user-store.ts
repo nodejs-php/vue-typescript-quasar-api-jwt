@@ -23,7 +23,7 @@ export default defineStore('user', {
   actions: {
     authenticate(values: any) {
       axios
-        .post('http://localhost:80/api/login', values)
+        .post(process.env.API + '/api/login', values)
         .then((response) => {
           if (response.data.status == 'success') {
             this.errorInfo = '';
@@ -51,7 +51,7 @@ export default defineStore('user', {
     },
     async authCheck(): Promise<void> {
       await axios
-        .get('http://localhost:80/api/user')
+        .get(process.env.API + '/api/user')
         .then((response) => {
           if (response.data) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

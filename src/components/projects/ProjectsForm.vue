@@ -60,7 +60,7 @@ const save = () => {
   clearErrors()
   data.loading = true
 
-  api.post('/documents', form).then(() => {
+  api.post('/projects', form).then(() => {
     router.push({name: 'documents.index'})
   }).catch((err) => {
     showError(err, 'result', 'Saving failed! Please try again.')
