@@ -43,11 +43,6 @@ export default route(function (/* { store, ssrContext } */) {
     document.title = to.meta.title;
     const store = useUserStore();
 
-    axios.interceptors.request.use(function (config) {
-      config.headers.Authorization = Cookies.get('access_cookie');
-      return config;
-    });
-
     store.authCheck().then(() => {
       if (to.meta.middleware) {
         if (to.meta.middleware == 'guest') {
