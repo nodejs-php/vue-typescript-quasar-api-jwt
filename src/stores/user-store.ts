@@ -36,7 +36,7 @@ export default defineStore('user', {
               config.headers.Authorization = Cookies.get('access_cookie');
               return config;
             });
-            this.router.push({ name: 'project-list' });
+            this.router.push({ name: 'projects-list' });
           } else {
             this.errorInfo = response.data.message;
             console.log(this.errorInfo);

@@ -58,7 +58,7 @@ const essentialLinks = [
     title: 'Проекты',
     caption: 'quasar.dev',
     icon: 'space_dashboard',
-    route: 'project-list',
+    route: 'projects-list',
   },
   {
     title: 'Таски',

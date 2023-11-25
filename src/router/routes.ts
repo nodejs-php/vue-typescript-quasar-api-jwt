@@ -1,20 +1,25 @@
-import { RouteRecordRaw } from 'vue-router';
-import Login from 'components/LoginForm.vue';
+import {RouteRecordRaw} from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    name: 'project-list',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/projects/ProjectList.vue') },
+      {
+        name: 'project-list',
+        path: '',
+        component: import('pages/projects/ProjectIndex.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Login',
+        },
+      },
     ],
     meta: {
       middleware: 'auth',
       title: 'Login',
     },
   },
-
   // Always leave this as last one,
   // but you can also remove it
   {
@@ -28,12 +33,13 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'login',
     path: '/login',
-    component: Login,
+    component: import('pages/auth/LoginForm.vue'),
     meta: {
       middleware: 'guest',
       title: 'Login',
     },
   },
+
 ];
 
 export default routes;
