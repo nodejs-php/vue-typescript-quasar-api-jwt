@@ -1,30 +1,31 @@
 <template>
   <q-page>
-    <q-card>
+    <q-card class="my-card">
       <q-card-section>
         <div>
           <div>
-            <div>Проекты</div>
+            <div>Новый проект</div>
             <div>Список проектов</div>
           </div>
           <div>
             <q-btn
-              to="/projects/new"
-              color="amber-6"
-              label="Создать новый"
+              to="/documents"
+              label="Back to list"
+              color="white"
+              text-color="black"
+              icon="arrow_left"
               rounded
-              unelevated
             />
           </div>
         </div>
       </q-card-section>
       <q-separator/>
       <q-card-section>
-        <ProjectTable/>
+        <DocumentsForm/>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 <script setup>
-import ProjectTable from 'components/projects/ProjectTable.vue'
+import DocumentsForm from 'src/components/projects/ProjectForm.vue'
 </script>

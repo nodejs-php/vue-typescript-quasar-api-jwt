@@ -6,9 +6,27 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        name: 'projects-list',
+        name: 'projects.list',
         path: '',
         component: import('pages/projects/ProjectIndex.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Login',
+        },
+      },
+      {
+        path: 'projects/new',
+        name: 'projects.create',
+        component: () => import('pages/projects/ProjectCreate.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Login',
+        },
+      },
+      {
+        path: 'projects/:id',
+        name: 'projects.show',
+        component: () => import('pages/projects/ProjectShow.vue'),
         meta: {
           middleware: 'auth',
           title: 'Login',

@@ -1,4 +1,4 @@
-import { route } from 'quasar/wrappers';
+import {route} from 'quasar/wrappers';
 import {
   createMemoryHistory,
   createRouter,
@@ -9,8 +9,6 @@ import {
 
 import routes from './routes';
 import useUserStore from '../stores/user-store';
-import axios from 'axios';
-import { Cookies } from 'quasar';
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -24,11 +22,11 @@ export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
-    ? createWebHistory
-    : createWebHashHistory;
+      ? createWebHistory
+      : createWebHashHistory;
 
   const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
+    scrollBehavior: () => ({left: 0, top: 0}),
     routes,
 
     // Leave this as is and make changes in quasar.conf.js instead!
@@ -43,24 +41,32 @@ export default route(function (/* { store, ssrContext } */) {
     document.title = to.meta.title;
     const store = useUserStore();
 
-    store.authCheck().then(() => {
-      if (to.meta.middleware) {
-        if (to.meta.middleware == 'guest') {
-          if (store.isLoggedIn) {
-            next({ name: 'project-list' });
-          }
-          next();
-        } else {
-          if (store.isLoggedIn) {
-            next();
-          } else {
-            next({ name: 'login' });
-          }
-        }
+    if (!to.meta.middleware || to.meta.middleware == 'guest') {
+      next();
+    } else {
+      if (store.isLoggedIn) {
+        next();
       } else {
+        next({name: 'login'});
       }
-    });
+    }
   });
 
   return Router;
 });
+
+
+/*
+          if (to.meta.middleware == 'guest') {
+              if (store.isLoggedIn) {
+                next({name: 'projects.list'});
+              }
+              next();
+            } else {
+              if (store.isLoggedIn) {
+                next();
+              } else {
+                next({name: 'login'});
+              }
+            }
+ */

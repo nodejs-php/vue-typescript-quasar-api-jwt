@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import  { onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { api } from 'src/boot/axios'
 import { projectsTableColumns } from 'components/utils/tableColumns'

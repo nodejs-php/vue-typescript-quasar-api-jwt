@@ -1,27 +1,32 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 import axios from 'axios';
-import { Cookies } from 'quasar';
+import {Cookies} from 'quasar';
 
 interface UserState {
-  isLoggedIn: boolean;
   errorInfo: string;
-  user: any;
+  user: User;
+}
+
+interface User {
+  id: number,
+  name: string,
+  email: string,
+  email_verified_at: string,
+  created_at: string,
+  updated_at: string
 }
 
 export default defineStore('user', {
-  state: (): UserState =>
-    <UserState>{
-      isLoggedIn: false,
+  state: () => <UserState>
+    {
       errorInfo: '',
       user: {},
     },
   getters: {
-    setLoggedIn(state: UserState): boolean {
-      return state.isLoggedIn;
-    },
+    isLoggedIn: () => Cookies.get('access_cookie') && Cookies.get('access_cookie') != '',
   },
   actions: {
-    authenticate(values: any) {
+    authenticate(values: ProxyConstructor) {
       axios
         .post(process.env.API + '/api/login', values)
         .then((response) => {
@@ -31,12 +36,7 @@ export default defineStore('user', {
               'access_cookie',
               response.data.token_type + ' ' + response.data.access_token
             );
-
-            axios.interceptors.request.use((config) => {
-              config.headers.Authorization = Cookies.get('access_cookie');
-              return config;
-            });
-            this.router.push({ name: 'projects-list' });
+            this.router.push({name: 'projects.list'});
           } else {
             this.errorInfo = response.data.message;
             console.log(this.errorInfo);
@@ -51,28 +51,28 @@ export default defineStore('user', {
     },
     async authCheck(): Promise<void> {
       await axios
-        .get(process.env.API + '/api/user')
+        .get(process.env.API + '/api/user', {
+          headers: {
+            'Authorization': 'Basic ' + Cookies.get('access_cookie')
+          }
+        })
         .then((response) => {
           if (response.data) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             this.user = response.data;
-            this.isLoggedIn = true;
+            this.router.push({name: 'projects.list'});
           } else {
-            this.user = {};
-            this.isLoggedIn = false;
+            this.user = <User>{};
           }
         })
         .catch((error) => {
           if (401 === error.response.status) {
-            this.user = {};
-            this.isLoggedIn = false;
+            this.user = <User>{};
           }
         });
     },
     logout(): void {
-      this.isLoggedIn = false;
-      Cookies.set('access_cookie', '');
-      this.router.push({ name: 'login' });
+      Cookies.remove('access_cookie');
+      this.router.push({name: 'login'});
     },
   },
 });
