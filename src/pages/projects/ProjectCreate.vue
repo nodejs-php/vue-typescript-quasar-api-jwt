@@ -5,12 +5,11 @@
         <div>
           <div>
             <div>Новый проект</div>
-            <div>Список проектов</div>
           </div>
           <div>
             <q-btn
-              to="/documents"
-              label="Back to list"
+              to="/"
+              label="Назад к списку"
               color="white"
               text-color="black"
               icon="arrow_left"

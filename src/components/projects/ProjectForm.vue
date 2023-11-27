@@ -28,7 +28,7 @@
         autogrow
       />
       <div style="max-width: 300px">
-        <q-input filled v-model="form.deadline" mask="date" :rules="['date']">
+        <q-input filled v-model="form.deadline" mask="date" :rules="['date']"  label="Дедлайн">
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy cover transition-show="scale" transition-hide="scale">
