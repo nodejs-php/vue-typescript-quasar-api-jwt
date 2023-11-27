@@ -50,9 +50,9 @@ const getAllData = async (tableProps) => {
   await api.get('/api/projects', { params })
     .then(async (res) => {
       data.rows = await res.data.data
-      data.pagination.rowsNumber = await res.data.meta.total
+      data.pagination.rowsNumber = await res.data.total
       data.pagination = await {...pagination}
-      await router.push({ name: 'projects.index', params })
+      await router.push({ path: '', params })
     }).finally(() => {
       data.loading = false
     })

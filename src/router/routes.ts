@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
         component: import('pages/projects/ProjectIndex.vue'),
         meta: {
           middleware: 'auth',
-          title: 'Login',
+          title: 'Список проектов',
         },
       },
       {
@@ -20,7 +20,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/projects/ProjectCreate.vue'),
         meta: {
           middleware: 'auth',
-          title: 'Login',
+          title: 'Новый проект',
         },
       },
       {
@@ -29,7 +29,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/projects/ProjectShow.vue'),
         meta: {
           middleware: 'auth',
-          title: 'Login',
+          title: 'Проект',
         },
       },
     ],
