@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia';
-import axios from 'axios';
 import {Cookies} from 'quasar';
 import {getUser, login} from 'components/api/auth';
 
@@ -23,6 +22,10 @@ export default defineStore('user', {
       errorInfo: '',
       user: {},
     },
+  persist: {
+    storage: sessionStorage,
+    paths: ['user'],
+  },
   getters: {
     isLoggedIn: () => Cookies.get('access-cookie') && Cookies.get('access-cookie') != '',
   },
