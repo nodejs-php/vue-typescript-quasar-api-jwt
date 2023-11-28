@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Приложение "Менеджер тасков" </q-toolbar-title>
+        <q-toolbar-title> Приложение "Менеджер тасков"</q-toolbar-title>
 
         <div>
           <q-btn color="primary" :label="userStore.user.name">
@@ -19,7 +19,8 @@
               <q-list style="min-width: 100px">
                 <q-item clickable v-close-popup>
                   <q-item-section @click="userStore.logout"
-                    >Выход</q-item-section
+                  >Выход
+                  </q-item-section
                   >
                 </q-item>
               </q-list>
@@ -31,40 +32,40 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Справочники </q-item-label>
-
+        <q-item-label header> Справочники</q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
-          :key="link.title"
+          :key="link.link"
           v-bind="link"
         />
       </q-list>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 import useUserStore from '../stores/user-store';
+
 const userStore = useUserStore();
 
 const essentialLinks = [
   {
     title: 'Проекты',
-    caption: 'quasar.dev',
+    caption: 'список проектов',
     icon: 'space_dashboard',
-    route: 'projects-list',
+    link: {name: 'projects.list'},
   },
   {
     title: 'Таски',
-    caption: 'github.com/quasarframework',
+    caption: 'список задач',
     icon: 'rule',
-    route: 'task-list',
+    link: {name: 'tasks.list'},
   },
 ];
 

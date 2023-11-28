@@ -57,7 +57,7 @@ const getAllData = async (tableProps) => {
 }
 
 const viewProject = (row) => {
-  router.push({ name: 'projects.show', params: {id: row.id} })
+  router.push({ name: 'tasks.show', params: {id: row.id} })
 }
 
 onMounted(async () => {

@@ -23,7 +23,7 @@ export default defineStore('user', {
       user: {},
     },
   persist: {
-    storage: sessionStorage,
+    storage: localStorage,
     paths: ['user'],
   },
   getters: {

@@ -29,14 +29,38 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/projects/ProjectShow.vue'),
         meta: {
           middleware: 'auth',
-          title: 'Проект',
+          title: 'Просмотр проекта',
+        },
+      },
+      {
+        name: 'tasks.list',
+        path: 'tasks',
+        component: import('pages/tasks/TaskIndex.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Список Задач',
+        },
+      },
+      {
+        path: 'tasks/new',
+        name: 'tasks.create',
+        component: () => import('pages/tasks/TaskCreate.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Новая задача',
+        },
+      },
+      {
+        path: 'tasks/:id',
+        name: 'tasks.show',
+        component: () => import('pages/tasks/TaskShow.vue'),
+        meta: {
+          middleware: 'auth',
+          title: 'Просмотр задачи',
         },
       },
     ],
-    meta: {
-      middleware: 'auth',
-      title: 'Login',
-    },
+
   },
   // Always leave this as last one,
   // but you can also remove it

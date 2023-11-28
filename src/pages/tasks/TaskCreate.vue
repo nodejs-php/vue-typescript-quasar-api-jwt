@@ -4,11 +4,11 @@
       <q-card-section>
         <div>
           <div>
-            <div>Новый проект</div>
+            <div>Новая задача</div>
           </div>
           <div>
             <q-btn
-              to="/"
+              to="/tasks"
               label="Назад к списку"
               color="white"
               text-color="black"
@@ -20,11 +20,11 @@
       </q-card-section>
       <q-separator/>
       <q-card-section>
-        <ProjectForm/>
+        <TaskForm/>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 <script setup>
-import ProjectForm from 'src/components/projects/ProjectForm.vue'
+import TaskForm from 'src/components/tasks/TaskForm.vue'
 </script>
