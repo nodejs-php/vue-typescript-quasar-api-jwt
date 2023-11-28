@@ -17,7 +17,7 @@ declare module '@vue/runtime-core' {
 // for each client)
 const api = axios.create({ baseURL: process.env.API,
   headers: {
-    'Authorization': 'Basic ' + Cookies.get('access_cookie')
+    'Authorization': 'Basic ' + Cookies.get('access-cookie')
   }
 });
 

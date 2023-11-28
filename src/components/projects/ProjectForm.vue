@@ -105,6 +105,7 @@
 import {onMounted, reactive} from 'vue'
 import {api} from 'src/boot/axios'
 import {useRouter} from 'vue-router'
+import {getProjectFormOptions} from 'components/api/projects';
 
 const router = useRouter()
 
@@ -168,7 +169,7 @@ const resetResultFields = () => {
 
 const getAllData = async () => {
   data.loading = true
-  await api.get('/api/project-form-options')
+  await getProjectFormOptions()
     .then(async (res) => {
       data.user_list = await res.data.users
       data.priority_list = await res.data.priority_list

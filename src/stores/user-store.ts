@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia';
 import axios from 'axios';
 import {Cookies} from 'quasar';
+import {getUser, login} from 'components/api/auth';
 
 interface UserState {
   errorInfo: string;
@@ -23,19 +24,19 @@ export default defineStore('user', {
       user: {},
     },
   getters: {
-    isLoggedIn: () => Cookies.get('access_cookie') && Cookies.get('access_cookie') != '',
+    isLoggedIn: () => Cookies.get('access-cookie') && Cookies.get('access-cookie') != '',
   },
   actions: {
     authenticate(values: ProxyConstructor) {
-      axios
-        .post(process.env.API + '/api/login', values)
+      login(values)
         .then((response) => {
           if (response.data.status == 'success') {
             this.errorInfo = '';
             Cookies.set(
-              'access_cookie',
+              'access-cookie',
               response.data.token_type + ' ' + response.data.access_token
             );
+            this.authCheck();
             this.router.push({name: 'projects.list'});
           } else {
             this.errorInfo = response.data.message;
@@ -49,13 +50,8 @@ export default defineStore('user', {
           }
         });
     },
-    async authCheck(): Promise<void> {
-      await axios
-        .get(process.env.API + '/api/user', {
-          headers: {
-            'Authorization': 'Basic ' + Cookies.get('access_cookie')
-          }
-        })
+    async authCheck() {
+      await getUser()
         .then((response) => {
           if (response.data) {
             this.user = response.data;
@@ -71,7 +67,7 @@ export default defineStore('user', {
         });
     },
     logout(): void {
-      Cookies.remove('access_cookie');
+      Cookies.remove('access-cookie');
       this.router.push({name: 'login'});
     },
   },

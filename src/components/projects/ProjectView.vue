@@ -70,7 +70,7 @@
 <script setup>
 import {reactive, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import {api} from 'src/boot/axios'
+import {getProjectsShow} from 'components/api/projects';
 
 const route = useRoute()
 const data = reactive({
@@ -79,7 +79,7 @@ const data = reactive({
 })
 
 const loadData = async (id) => {
-  await api.get(`/api/projects/${id}`)
+  await getProjectsShow(id)
     .then(async (res) => {
       data.project = await res.data
     }).finally(() => {
