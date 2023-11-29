@@ -40,7 +40,7 @@ export default defineStore('user', {
               response.data.token_type + ' ' + response.data.access_token
             );
             this.authCheck();
-            this.router.push({name: 'projects.list'});
+            this.router.push({path: '/'});
           } else {
             this.errorInfo = response.data.message;
             console.log(this.errorInfo);

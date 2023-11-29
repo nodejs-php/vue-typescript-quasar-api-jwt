@@ -22,16 +22,15 @@
 <script setup>
 import  { onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { api } from 'src/boot/axios'
-import { projectsTableColumns } from 'components/utils/tableColumns'
-import {getProjects} from 'components/api/projects';
+import { tasksTableColumns } from 'components/utils/tableColumns'
+import {getTasks} from 'components/api/tasks';
 
 const router = useRouter()
 
 const data = reactive({
   loading: false,
   rows: [],
-  columns: projectsTableColumns,
+  columns: tasksTableColumns,
   pagination: {
     page: 1,
     rowsPerPage: 12,
@@ -45,7 +44,7 @@ const getAllData = async (tableProps) => {
   data.loading = true
   const params = await { page }
 
-  await getProjects(params)
+  await getTasks(params)
     .then(async (res) => {
       data.rows = await res.data.data
       data.pagination.rowsNumber = await res.data.total

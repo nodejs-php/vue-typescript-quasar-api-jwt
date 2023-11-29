@@ -15,12 +15,6 @@
           </q-card-section>
 
           <q-card-section>
-            <div class="text-subtitle2 tw-pb-3">Priority</div>
-            <div v-html="data.project.priority" style="white-space: pre-line;"></div>
-          </q-card-section>
-
-
-          <q-card-section>
             <div class="text-subtitle2 tw-py-3">Status</div>
             <div v-html="data.project.status"></div>
           </q-card-section>
@@ -70,7 +64,7 @@
 <script setup>
 import {reactive, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import {getProjectsShow} from 'components/api/projects';
+import {getTasksShow} from 'components/api/tasks';
 
 const route = useRoute()
 const data = reactive({
@@ -79,7 +73,7 @@ const data = reactive({
 })
 
 const loadData = async (id) => {
-  await getProjectsShow(id)
+  await getTasksShow(id)
     .then(async (res) => {
       data.project = await res.data
     }).finally(() => {
