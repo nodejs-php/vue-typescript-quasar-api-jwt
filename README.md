@@ -1,21 +1,21 @@
-# Time tracker (time-tracker-frontend)
+# Тайм-трекер (time-tracker-frontend)
 
-Ti,e Tracker
+Тайм-трекер
 
-## Install the dependencies
+## Установка зависимостей
 ```bash
 yarn
 # or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Запуск приложения в режиме разработки (горячая перезагрузка кода, отчет об ошибках и т.д.)
 ```bash
 quasar dev
 ```
 
 
-### Lint the files
+### Линтинг файлов
 ```bash
 yarn lint
 # or
@@ -23,7 +23,7 @@ npm run lint
 ```
 
 
-### Format the files
+### Форматирование файлов
 ```bash
 yarn format
 # or
@@ -32,10 +32,10 @@ npm run format
 
 
 
-### Build the app for production
+### Сборка приложения для продакшена
 ```bash
 quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+### Настройка конфигурации
+См.  [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
